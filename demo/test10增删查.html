@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div id="app">
+        编号：<input type="text" v-model="id">
+        车名：<input type="text" v-model="name">
+        <input type="button" value="添加" @click="add">
+        <label for="">
+            关键字搜索：<input type="text" class="" v-model="keywords">
+        </label>
+        <table class="table el-table--border table-hover">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>ctime</th>
+                    <th>opt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in search(keywords)" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td v-text="item.name"></td>
+                    <td>{{item.ctime}}</td>
+                    <td><a href="" @click.prevent="del(id)">删除</a></td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            id:"",
+            name:"",
+            keywords:"",
+            list:[
+                {id:1,name:"benchi",ctime:new Date()},
+                {id:2,name:"aodi",ctime:new Date()}
+            ],
+           
+        },
+        methods:{
+            add(){
+                var car={id:this.id,name:this.name,ctime:new Date()}
+                this.list.push(car) 
+                },
+            del(id){
+                var index=this.list.findIndex(item=>{
+                    if (item.id==id){
+                        return
+                    }
+                })
+                this.list.splice(index,1);
+            },
+            search(keywords){
+                // var newlist=[]
+                // this.list.forEach(item=>{
+                //     if(item.name.indexOf(keywords) !=-1){
+                //         newlist.push(item)
+                //     }
+                // })
+                // return newlist 
+                return this.list.filter(item=>{
+                        if(item.name.includes(keywords)){
+                        return item
+                    }
+                        // return newlist
+                })
+            }
+           
+           //第二种方法：
+           //foreach，some，filter，findinddex都是数组新方法
+         
+        }
+    })
+</script>
+</html>

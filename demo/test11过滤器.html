@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <p>{{msg | msgReplace}}</p>   -->
+       <!-- 可以传多个参 -->
+       <!-- <p>{{msg | msgReplace("东西","南北")}}</p> -->
+       <!-- 可以多次调用 -->
+       <p>{{msg | msgReplace("东西","南北") | test}}</p>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    //过滤器
+    Vue.filter("msgReplace",function(msg,arg,arg2){
+        //replace方法不光可以定义字符串还可以定义正则
+        return msg.replace(/北/g,arg+arg2)//g全局匹配
+    })
+    Vue.filter("test",function(msg){
+        return msg+"(飞扬飞扬~)"
+    })
+
+
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            msg:"狼烟起江山北望，人北望草金黄，尘飞扬"
+        },
+        methods: {
+            
+        },
+    })
+</script>
+</html>

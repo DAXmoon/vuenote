@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <style>
+        .parent{
+            width: 500px;
+            height: 500px;
+            margin:0 auto;
+            border: 1px solid #0000ff;
+        }
+        .child{
+            font-size: 50px;
+            background: #ffff00;
+            color: #ff00ff;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div-parent></div-parent>
+        <!-- 局部注册的子组件不能单独使用 -->
+        <h1-child></h1-child>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script src="./index.js"></script>
+<script>
+   
+    //全局变量和局部变量的区别
+      //定义子组件
+    var child={
+        template:`
+            <h1 class="child">子组件</h1>
+        `,
+    }
+        //定义父组件
+    var parent={
+        //父组件中注册局部子组件,限定仅在父组件内使用
+        components:{
+            "h1-child":child
+        },
+        template:`
+            <div class="parent">
+                <h1-child></h1-child>
+            </div>
+        `,
+    }
+    //注册全局子组件
+    Vue.component("h1-child",child);//现在子组件可以全局使用了
+
+    var vm=new Vue({
+        //注册局部父组件
+       components:{
+        "div-parent":parent
+       },
+       el:"#app",
+       data:{
+
+       }
+    })
+</script>
+</html>

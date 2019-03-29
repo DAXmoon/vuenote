@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>demo</title>
+    <link rel="stylesheet" href="./index.css">
+    <style>
+      /* [v-cloak] {
+        dispaly:none;
+      } */
+      .box{
+        height: 100px;
+        width: 100px;
+        background: #f00;
+      }
+      .box2{
+        height: 100px;
+        width: 100px;
+        background: #0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div id="app" v-cloak>
+      <h1>{{msg}}</h1>
+      <input type="text" v-model="msg">
+    </div> -->
+    <!-- built files will be auto injected -->
+    <div id="app">
+      <!-- <div class="box" v-if="isShow"></div> -->
+      <!-- v-show和v-if的区别：v-show对样式作用移除样式，
+      v-if是添加或移除dom元素，对性能要求较高。 -->
+      <!-- <div class="box2" v-else="isShow"></div>
+      <button v-on:click="toggle">切换显示</button> -->
+        
+      <ul>
+        <li v-for="(item,index) in arr">
+          <h2>{{item.title}}</h2>
+          <div>{{item.date}}</div>
+          <div>number{{index+1}}</div>
+        </li>
+      </ul>
+    </div>
+    
+  </body>
+  <script src="vue.js"></script>
+  <script src="axios.js"></script>
+  <script src="index.js"></script>
+  <script>
+      // var app=new Vue({
+      //   el:"#app",
+      //   data:{
+      //     msg:"helloworld"
+      //   }
+      // })
+
+      var arr=[
+        {
+          title:"biaoti1",
+          date:"2019-3-21"
+        },
+        {
+          title:"biaoti2",
+          date:"2019-3-21"
+        }
+      ]
+      var vm = new Vue({
+        el: "#app",
+        data: {
+            isShow: true,
+            arr
+        },
+        methods: {
+            toggle:function() {
+                this.isShow = !this.isShow;
+                console.log(this.isShow)
+          }
+        }
+      })
+  </script>
+</html>

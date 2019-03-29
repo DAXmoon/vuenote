@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <dy-button></dy-button>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    //定义组件内容
+    var count = {
+        template: `
+            <button v-on:click="handleAdd">{{num}}</button>
+        `,//方法声明在methods里
+        data(){
+            return{
+                num:1
+                }
+            },
+        methods:{
+            handleAdd(){
+                this.num++
+            }
+        }
+    }
+    var vm=new Vue({
+        //注册组件
+        components: {
+            "dy-button": count
+        },
+        el:"#app",
+        data:{
+            
+        }
+    })
+</script>
+</html>

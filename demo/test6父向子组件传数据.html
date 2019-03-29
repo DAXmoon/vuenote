@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            border: 1px solid #f0f;
+        }
+        .active{
+            background: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <el-button @click="addClass">button</el-button>
+        <div class="box" v-band:class="{active: isActive"></div>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script src="./index.html"></script>
+<script>
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            isActive:false
+        },
+        methods:{
+            addClass(){
+
+            }
+        }
+    })
+    //组件内部使用props传值
+    var newbtn={
+        props:{
+            type:string,
+            //default:默认值
+        },
+        template:`
+            <button class="btn" :class="{primary}">
+                <slot></slot>
+            </button>`
+    }
+</script>
+</html>

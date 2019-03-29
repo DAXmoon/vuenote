@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <style>
+        .btn{
+            width: 100px;
+            height: 100px;
+            line-height: 100xp;
+            background: #f00;
+            color: #fff;
+            font-size: 20px;
+            -webkit-appearance: none;
+        }
+        .btn:active{
+            background: #0f0;
+            color: #0000ff;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <el-button type="primary">按钮</el-button>
+        <el-tabs v-model="activName2" type="card">
+            <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+            <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+            <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+            <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+        </el-tabs>
+        
+        <!-- 组件 -->
+        <mybtn>1223</mybtn>
+        <mybtn>3413</mybtn>
+        <hs-button>按钮</hs-button>
+    </div>
+</body>
+    <script src="./vue.js"></script>
+    <script src="./index.js"></script>
+    <script>
+        //组件注册，组件就是对象
+        //组件支持vue的所有方法，包括data，methods，create
+        //1、定义组件，使用template定义组件内容
+        var obj={
+            template:`
+                <button class="btn" v-on:click="handelClick"><slot></slot></button>
+            `,
+            data(){//组件中的data必须是一个函数
+                return{
+                    msg:"按钮"
+                }//组件中的data必须返回新对象
+            },
+            methods:{
+                handelClick(){
+                    console.log("点击")
+                }
+            },
+            created(){
+                console.log("这是按钮")
+            }
+        }
+   
+        //2、局部注册组件，使用components注册自定义组件
+        //作用在作用域（父组件）内
+        var vm=new Vue({
+            components:{
+                "mybtn":obj
+            },
+            el:"#app",
+            data:{
+                activName2:""
+            }
+        })
+
+        //3、全局注册组件
+        Vue.component("hs-button",obj);//组件名，组件内容
+
+
+    </script>
+</html>

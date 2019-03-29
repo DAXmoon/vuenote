@@ -1,0 +1,16 @@
+munted(){
+
+}//dom挂载完成的钩子函数
+
+自定义指令可以在dom插入的时候执行
+例：聚焦
+template:`
+<input type="text" class="input" v-focus/>
+`
+directives：{
+    "focus":{
+        insertd(el){
+            el.focus();
+        }
+    }
+}
